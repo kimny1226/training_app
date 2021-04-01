@@ -1,0 +1,106 @@
+# Linux エイリアス登録
+$ vi ~/.bashrc
+alias ll='ls -al'
+alias vssh='vagrant ssh -c "cd /vagrant; bash"';
+alias art='php artisan'
+
+$ source ~/.bashrc
+
+
+1. GitHubでリポジトリ作成
+2. clone 必要に応じてブランチ切替(develop等)
+$ git clone https://github.com/kimny1226/training_app.git
+
+3. laravel6 インストール
+$ cd training_app/
+$ composer create-project --prefer-dist laravel/laravel app 6.*
+
+4. add、commit、push
+
+5. ライブラリ取得
+$ cd app/
+$ composer install
+
+5. 認証(公式より) https://readouble.com/laravel/6.x/ja/authentication.html
+$ composer require laravel/ui "^1.0" --dev
+$ art migrate
+
+6. nodeモジュール css生成(bootstrap有効)
+$ npm install && npm run dev
+
+
+
+## Service作成
+1. 本体作成
+app\app\Services\XxxService.php
+2. ServiceProvider作成
+$ art make:provider XxxServiceProvider
+3. Facade作成
+app\app\Facades\XxxService.php
+4. alias登録
+app\config\app.php
+5. 利用
+use XxxService;
+XxxService::xxxxx();
+
+==============================================
+PJ
+    app
+        Console
+        Exceptions
+        (Facades)
+            (XxxService.php)
+        Http
+            Controllers
+            Middleware
+            Kernel.php
+        Providers
+            AppServiceProvider.php
+            (XxxServiceProvider.php)
+        (Services)
+            (XxxService.php)
+        User.php
+
+
+    bootstrap
+    config
+        app.php
+        auth.php
+    database
+        factories
+            UserFactory.php
+        migrations
+            2014_10_12_000000_create_users_table.php
+            2014_10_12_100000_create_password_resets_table.php
+            2019_08_19_000000_create_failed_jobs_table.php
+        seeds
+            DatabaseSeeder.php
+    public
+    resources
+        lang
+            en
+            ja
+        views
+            auth
+            layouts
+            home.blade.php
+            welcome.blade.php
+    routes
+        api.php
+        web.php
+    storage
+        app
+        framework
+        logs
+            laravel-2021-03-28.log
+            laravel.log
+    tests
+        Feature
+            ExampleTest.php
+        Unit
+            ExampleTest.php
+        CreatesApplication.php
+        TestCase.php
+    vendor
+    .env
+==============================================
