@@ -53,6 +53,16 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+            // start 権限設定
+            'permissions' => [
+                'dir' => [
+                    'public' => 0775,
+                ],
+                'file' => [
+                    'public' => 0664,
+                ],
+            ],
+            // end 権限設定
         ],
 
         's3' => [
