@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use LessonService;
+use LessonService;
 
-class HomeController extends Controller
+class MainController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dump(LessonService::getLesson1());
-        return view('home');
+        return view('main')->with('dispList', LessonService::getStart());
     }
 }
